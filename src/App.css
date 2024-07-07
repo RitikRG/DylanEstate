@@ -6,6 +6,7 @@
   --secondary-bg:#FCF8F4;
   --primary-bg: #122B49;
   --border-color:#7A7A7A;
+  --selected-blue:#EDF2F8;
 }
 
   
@@ -262,6 +263,194 @@
   } 
 }
 
+
+
+
+
+/* List your property */
+
+  .notification-holder{
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+  }
+  .listPropertyContainer{
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    /* List your property */
+    .lp-nav{
+      background-color: var(--secondary-bg);
+      display: flex;
+      justify-content: space-between;
+      p{
+        padding: 30px;
+        font-size: 0.9rem;
+        text-align: center;
+        border-bottom: 8px solid var(--border-color);
+      }
+      .active-tab{
+        color: black;
+        background-color: var(--selected-blue);
+      }
+      .non-active-tab{
+        color: var(--border-color);
+      }
+      .completed-tab{
+        color: var(--primary-bg);
+        border-bottom: 8px solid var(--primary-bg);
+      }
+    }
+
+    .property-form {
+      height: 300px;
+      overflow-y: scroll;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 20px;
+
+      #property_for{
+        grid-column-start: 1;
+        grid-column-end:3;
+      }
+      #property_type{
+        grid-column-start: 1;
+        grid-column-end:4;
+      }
+      #built-up-area{
+        grid-column-start: 1;
+        grid-column-end:3;
+      }
+      #carpet-area-con{
+        grid-column-start: 3;
+        grid-column-end:5;
+      }
+      #property-on-floor-con{
+        grid-column-start: 1;
+        grid-column-end:2;
+      }
+      #total-floors-con{
+        grid-column-start: 2;
+        grid-column-end:3;
+      }
+      #property-facing-con{
+        grid-column-start: 3;
+        grid-column-end:5;
+      }
+      #property_age{
+        grid-column-start: 1;
+        grid-column-end:5;
+      }
+      #bhk_type{
+        grid-column-start: 1;
+        grid-column-end:5;
+      }
+      #bathrooms_toilets{
+        grid-column-start: 1;
+        grid-column-end:5;
+      }
+      #balcony{
+        grid-column-start: 1;
+        grid-column-end:5;
+      }
+      #tenant_preference{
+        grid-column-start: 1;
+        grid-column-end:5;
+      }
+      #availability{
+        grid-column-start: 1;
+        grid-column-end:5;
+      }
+      #property-description-con{
+        grid-column-start: 1;
+        grid-column-end:5;
+      }
+
+      .button-group input[type="radio"] {
+          display: none;
+      }
+      
+      .button-group label {
+          display: inline-block;
+          font-weight: 400;
+          padding: 10px 20px;
+          border: 1px solid var(--border-color);
+          border-radius: 20px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          margin-right: 10px;
+      }
+      
+      .button-group input[type="radio"]:checked + label {
+          background-color: var(--primary-bg);
+          color: white;
+          border-color: #007bff;
+      }
+      
+      .button-group label:hover {
+          background-color: #f0f0f0;
+      }
+
+      .required {
+        color: red;
+      }
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+    .form-group div.radio-group{
+      margin-top: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .form-group div.radio-group label{
+      display: inline;
+      font-weight: 400;
+    }
+    
+    .form-group input[type="number"],
+    .form-group input[type="text"],
+    .form-group textarea,
+    .form-group select {
+        width: calc(100% - 10px);
+        padding: 8px;
+        margin-right: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    
+    .form-group input[type="radio"] {
+        margin-right: 5px;
+    }
+    
+    .form-group textarea {
+        height: 100px;
+    }
+
+    .lp-footer{
+      background-color: var(--primary-bg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      padding: 10px 30px;
+      font-size: 0.9rem;
+    }
+  }
 
 
 
