@@ -304,10 +304,12 @@
         border-bottom: 8px solid var(--primary-bg);
       }
     }
-
-    .property-form {
+    .lp-form{
       height: 300px;
       overflow-y: scroll;
+    }
+
+    .property-form {
       background: white;
       padding: 20px;
       border-radius: 8px;
@@ -397,14 +399,16 @@
       .button-group label:hover {
           background-color: #f0f0f0;
       }
-
-      .required {
-        color: red;
-      }
+    }
+    .required {
+      color: red;
     }
     
     .form-group {
         margin-bottom: 15px;
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 10px;
     }
     
     .form-group label {
@@ -441,6 +445,23 @@
         height: 100px;
     }
 
+    .location-details{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .google-map-con{
+      grid-column-start: 1;
+      grid-column-end:3;
+      label{
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding-bottom: 10px;
+      }
+    }
+
     .lp-footer{
       background-color: var(--primary-bg);
       display: flex;
@@ -452,6 +473,146 @@
     }
   }
 
+  .features-form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+  
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    row-gap: 40px;
+
+    input[type='checkbox']{
+      height: 20px;
+      width: 20px;
+    }
+
+    #non-veg{
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    #pets-allowed{
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    #electricity{
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    #water-supply{
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+    hr{
+      grid-column-start: 1;
+      grid-column-end: 5;
+    }
+    #furnishing{
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+    #additional-features{
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+    #tiles{
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+    #safety{
+      grid-column-start: 1;
+      grid-column-end: 5;
+      .button-group{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .button-group{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      row-gap: 20px;
+      div{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        label{
+          font-weight: 400;
+        }
+      }
+    }
+
+    .amenities-grid{
+      grid-column-start: 1;
+      grid-column-end: 5;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 20px;
+
+      h2{
+        grid-column-start: 1;
+        grid-column-end: 5;
+      }
+      .amenity-item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+        padding: 20px;
+
+        img{
+          width: 32px;
+        }
+        label{
+          color: var(--border-color);
+          font-size: 0.8rem;
+        }
+      }
+    }
+    
+  }
+
+  .price-details{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+
+    .form-group{
+      padding: 20px;
+    }
+    #maintainance-cost-con{ 
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+
+      input{
+        grid-column-start: 1;
+      }
+    }
+    .additional-pricing-detail-con{
+      grid-column-start: 1;
+      grid-column-end:3;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px;
+
+      textarea{
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        padding: 10px;
+      }
+    }
+
+  }
 
 
 
+
+.hide{
+  display: none!important;
+}
