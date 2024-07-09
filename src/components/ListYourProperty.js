@@ -130,7 +130,7 @@ const ListYourProperty =()=>{
                     <p className={setNavClass(curTab,5)}>PROPERTY IMAGES</p>
                 </div>
                 <div className="lp-form">
-                <form>
+                <form onSubmit={(e)=>{e.preventDefault()}}>
                     <div className={formSectionClass[1]} id='property-form'>
                             <div className="form-group"  id="property_for">
                                 <label><span className="required">*</span>Property For:</label>
@@ -177,27 +177,27 @@ const ListYourProperty =()=>{
                             
                             <div className="form-group" id="built-up-area">
                                 <label for="built-up-area">Built up Area<span className="required">*</span></label>
-                                <input type="number" id="built-up-area" name="built_up_area" required placeholder="Sq. Ft." onInput={handleSelections}/> 
+                                <input type="number" id="built-up-area" name="built_up_area" placeholder="Sq. Ft." onInput={handleSelections}/> 
                             </div>
                             
                             <div className="form-group" id="carpet-area-con">
                                 <label for="carpet-area">Carpet Area<span className="required">*</span></label>
-                                <input type="number" id="carpet-area" name="carpet_area" required placeholder="Sq. Ft." onInput={handleSelections}/> 
+                                <input type="number" id="carpet-area" name="carpet_area" placeholder="Sq. Ft." onInput={handleSelections}/> 
                             </div>
                             
                             <div className="form-group" id="property-on-floor-con">
                                 <label for="property-on-floor">Property on Floor<span className="required">*</span></label>
-                                <input type="number" id="property-on-floor" name="property_on_floor" required onInput={handleSelections}/>
+                                <input type="number" id="property-on-floor" name="property_on_floor" onInput={handleSelections}/>
                             </div>
                             
                             <div className="form-group" id="total-floors-con">
                                 <label for="total-floors">Total Floors <span className="required">*</span></label>
-                                <input type="number" id="total-floors" name="total_floors" required onInput={handleSelections}/>
+                                <input type="number" id="total-floors" name="total_floors" onInput={handleSelections}/>
                             </div>
                             
                             <div className="form-group" id="property-facing-con">
                                 <label for="property-facing">Property Facing <span className="required">*</span></label>
-                                <select id="property-facing" name="property_facing" required onInput={handleSelections}>
+                                <select id="property-facing" name="property_facing" onInput={handleSelections}>
                                     <option value="">Select</option>
                                     <option value="North">North</option>
                                     <option value="South">South</option>
@@ -298,7 +298,7 @@ const ListYourProperty =()=>{
                             
                             <div className="form-group" id="property-description-con">
                                 <label for="property-description">Property Description</label>
-                                <textarea id="property-description" name="property_description" required onInput={handleSelections}></textarea>
+                                <textarea id="property-description" name="property_description" onInput={handleSelections}></textarea>
                             </div>
                             
                     </div>
@@ -307,12 +307,12 @@ const ListYourProperty =()=>{
                     <div className={formSectionClass[2]} id="location-details">
                             <div class="form-group" id="building/society-name-con">
                                 <label for="building-society-name">Building / Society Name<span class="required">*</span></label>
-                                <input type="text" id="building-society-name" name="building-society-name" required placeholder="Enter Apartment Name" onInput={handleSelections}/>
+                                <input type="text" id="building-society-name" name="building-society-name" placeholder="Enter Apartment Name" onInput={handleSelections}/>
                             </div>
 
                             <div class="form-group" id="locality-area-con">
                                 <label for="locality-area">Locality / Area<span class="required">*</span></label>
-                                <input type="text" id="locality-area" name="locality-area" required placeholder="Eg: sheetal nagar" onInput={handleSelections}/>
+                                <input type="text" id="locality-area" name="locality-area" placeholder="Eg: sheetal nagar" onInput={handleSelections}/>
                             </div>
 
                             <div class="form-group" id="landmark-street-name-con">
@@ -557,12 +557,12 @@ const ListYourProperty =()=>{
                     <div className={formSectionClass[4]} id="price-details">
                             <div className="form-group" id="rent-con">
                                 <label for="rent">Rent<span class="required">*</span></label>
-                                <input type="text" id="rent" name="rent" required placeholder="₹/Month" onInput={handleSelections}/>
+                                <input type="text" id="rent" name="rent" placeholder="₹/Month" onInput={handleSelections}/>
                             </div>
 
                             <div className="form-group" id="security-con">
                                 <label for="security">Security<span class="required">*</span></label>
-                                <input type="text" id="security" name="security" required placeholder="₹/Month" onInput={handleSelections}/>
+                                <input type="text" id="security" name="security" placeholder="₹/Month" onInput={handleSelections}/>
                             </div>
                             <div className="form-group" id="maintainance-con">
                                 <label for="maintainance">Maintenance<span class="required">*</span></label>
