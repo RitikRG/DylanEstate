@@ -309,7 +309,7 @@
       overflow-y: scroll;
     }
 
-    .property-form {
+    #property-form {
       background: white;
       padding: 20px;
       border-radius: 8px;
@@ -445,7 +445,7 @@
         height: 100px;
     }
 
-    .location-details{
+    #location-details{
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
@@ -473,7 +473,7 @@
     }
   }
 
-  .features-form {
+  #features-form {
     background: white;
     padding: 20px;
     border-radius: 8px;
@@ -575,7 +575,7 @@
     
   }
 
-  .price-details{
+  #price-details{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
