@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import notification from '../assets/notification.svg';
 import GoogleMapComponent from "./GoogleMapComponent";
-
+import '../css/modal.css';
 
 const ListYourProperty =()=>{
 
@@ -112,16 +112,32 @@ const ListYourProperty =()=>{
 
     const printSelection=()=>{
         console.log(selections);
-        // console.log(locationDetailSelections);
-        // console.log(featuresDetailSelections);
-        // console.log(priceDetailSelections);
+    }
+
+    const [overlayVisible, setOverlayVisible] = useState('hide');
+
+    const openOverlay = () => {
+        setOverlayVisible('modal-overlay');
+    };
+
+    const closeOverlay=(e)=>{
+        if(e.target.className!='modal-content'){
+            setOverlayVisible('hide');
+        };
+    }
+
+    const [containerSymbol, setContainerSymbol] = useState('listPropertyContainer');
+    const finalSubmit=()=>{
+        setContainerSymbol('hide');
+        setOverlayVisible('hide');
+        console.log(selections);
     }
 
 
     return(
         <>
             <a href="#" className="notification-holder" onClick={printSelection}><img src={notification}></img></a>
-            <div className="listPropertyContainer">
+            <div className={containerSymbol}>
                 <div className="lp-nav">
                     <p className={setNavClass(curTab,1)}>PROPERTY DETAILS</p>
                     <p className={setNavClass(curTab,2)}>LOCATION DETAILS</p>
@@ -611,9 +627,16 @@ const ListYourProperty =()=>{
                     {/* form footer */}
                     <div className="lp-footer">
                         <p className="help-text">Need Help? <strong>Call 9999999999</strong> </p>
-                        {curTab>=5?<button className="btn" onClick={handleSubmit} type="Submit">SAVE & POST</button>:<button className="btn" onClick={handleSubmit}>Next</button>}
+                        {curTab>=5?<button className="btn"  onClick={openOverlay} type="Submit">SAVE & POST</button>:<button className="btn" onClick={handleSubmit}>Next</button>}
                     </div>
                 </form>
+                </div>
+            </div>
+            <div className={overlayVisible} onClick={closeOverlay}>
+                <div className="modal-content">
+                    <h2>POST PROPERTY ON DYLAN ESTATE? <span className="required">*</span></h2>
+                    <button className={"modal-button"} onClick={finalSubmit}>Continue</button>
+                    <p>By continuing you agree to our <a href="/terms">Terms and Conditions & Privacy Policy</a></p>
                 </div>
             </div>
         </>
