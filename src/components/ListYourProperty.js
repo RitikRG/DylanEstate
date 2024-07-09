@@ -11,7 +11,8 @@ const ListYourProperty =()=>{
         'features':[],
         'tiles':[],
         'safety':[],
-        'amenities':[]
+        'amenities':[],
+        'photos':[]
     });
 
     const [showMaintainance, setShowMaintainance] = useState('hide');
@@ -42,15 +43,25 @@ const ListYourProperty =()=>{
             setSelections(updateCheckboxSelection(e,selections));
         }
     }
-    // const handleLocationDetailSelections=(e)=>{
-    //     updateSelection(e,locationDetailSelections);
-    // }
-    // const handleFeaturesDetailSelections=(e)=>{
-    //     updateSelection(e,featuresDetailSelections);
-    // }
-    // const handlePriceDetailSelections=(e)=>{
-    //     updateSelection(e,priceDetailSelections);
-    // }
+
+    const updatePhotoSelection=(e, selections)=>{
+        let prevVal = selections[e.target.name];
+        selections[e.target.name]= [...prevVal, ...Array.from(e.target.files)];
+        const previewAreaUl=document.getElementById('preview-area-ul');
+        Array.from(e.target.files).forEach(element => {
+            previewAreaUl.innerHTML+=`
+                <li>
+                    <img src=${URL.createObjectURL(element)} className="preview-image"/>
+                </li>`;
+        });
+        return selections;
+    }
+
+    const handlePhotos = (e) => {
+        setSelections(updatePhotoSelection(e,selections));
+    };
+
+    const [previewImages, setPreviewImages] = useState('ok');
 
     const setNavClass =(curTab, tabNum)=>{
         if(curTab==tabNum){
@@ -62,13 +73,13 @@ const ListYourProperty =()=>{
         }
     }
 
-    const [formSectionClass, setFormSectionClass]=useState(['','','hide','hide','hide'])
+    const [formSectionClass, setFormSectionClass]=useState(['','sub-form','hide','hide','hide','hide'])
     
     const updateFormSection=(formSectionClass)=>{
         // console.log(curTab);
-        for(let i=1;i<5;i++){
+        for(let i=1;i<6;i++){
             if(i==curTab+1){
-                formSectionClass[i]='';
+                formSectionClass[i]='sub-form';
             }else{
                 formSectionClass[i]='hide';
             }
@@ -80,14 +91,14 @@ const ListYourProperty =()=>{
         setFormSectionClass(updateFormSection(formSectionClass));
         // console.log(formSectionClass);
     }
-    const [propTypeSelectionClass, setpropTypeSelectionClass]=useState(['button-group hide','button-group hide'])
+    const [propTypeSelectionClass, setpropTypeSelectionClass]=useState(['hide','hide'])
     const handlePropChange=(e)=>{
         if(e.target.value=='Residential'){
-            setpropTypeSelectionClass(['button-group','button-group hide']);
+            setpropTypeSelectionClass(['button-group','hide']);
         }else if(e.target.value=='Commercial'){
-            setpropTypeSelectionClass(['button-group hide','button-group']);
+            setpropTypeSelectionClass(['hide','button-group']);
         }else{
-            setpropTypeSelectionClass(['button-group hide','button-group hide'])
+            setpropTypeSelectionClass(['hide','hide'])
         }
     }
 
@@ -579,11 +590,30 @@ const ListYourProperty =()=>{
                             </div>
                     </div>
 
+                    {/* Property photos */}
+                    <div className={formSectionClass[5]} id="property-photos">
+                        <div className="prop-photo-title">Add Photos / videos to attract more tenants!</div>
+                        <div className="prop-photo-subtitle">
+                            Add Photos of living room, bedroom, bathroom, floor, doors, kitchen,
+                            balcony, location map, neighborhood, etc.
+                        </div>
+                        <div className="upload-area">
+                            <input type="file" id="fileInput" name="photos" multiple accept="image/*,video/*" style={{display:"none"}} onInput={handlePhotos}/>
+                            <button type="button" className="upload-icon" onClick={() => document.getElementById('fileInput').click()}><img src="https://img.icons8.com/ios/50/camera--v3.png"/></button>
+                            <button type="button" className="upload-button btn" onClick={() => document.getElementById('fileInput').click()}>+ Add Photos Now</button>
+                        </div>
+                        <div className="preview-area">
+                            <h2>Preview:</h2>
+                            <ul id="preview-area-ul"></ul>
+                        </div>
+                    </div>
+
+                    {/* form footer */}
+                    <div className="lp-footer">
+                        <p className="help-text">Need Help? <strong>Call 9999999999</strong> </p>
+                        {curTab>=5?<button className="btn" onClick={handleSubmit} type="Submit">SAVE & POST</button>:<button className="btn" onClick={handleSubmit}>Next</button>}
+                    </div>
                 </form>
-                </div>
-                <div className="lp-footer">
-                    <p className="help-text">Need Help? <strong>Call 9999999999</strong> </p>
-                    <button className="btn" type="Submit" onClick={handleSubmit}>Next</button>
                 </div>
             </div>
         </>
