@@ -1,0 +1,91 @@
+#property-form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+
+    #property_for{
+      grid-column-start: 1;
+      grid-column-end:3;
+    }
+    #property_type{
+      grid-column-start: 1;
+      grid-column-end:4;
+    }
+    #built-up-area{
+      grid-column-start: 1;
+      grid-column-end:3;
+    }
+    #carpet-area-con{
+      grid-column-start: 3;
+      grid-column-end:5;
+    }
+    #property-on-floor-con{
+      grid-column-start: 1;
+      grid-column-end:2;
+    }
+    #total-floors-con{
+      grid-column-start: 2;
+      grid-column-end:3;
+    }
+    #property-facing-con{
+      grid-column-start: 3;
+      grid-column-end:5;
+    }
+    #property_age{
+      grid-column-start: 1;
+      grid-column-end:5;
+    }
+    #bhk_type{
+      grid-column-start: 1;
+      grid-column-end:5;
+    }
+    #bathrooms_toilets{
+      grid-column-start: 1;
+      grid-column-end:5;
+    }
+    #balcony{
+      grid-column-start: 1;
+      grid-column-end:5;
+    }
+    #tenant_preference{
+      grid-column-start: 1;
+      grid-column-end:5;
+    }
+    #availability{
+      grid-column-start: 1;
+      grid-column-end:5;
+    }
+    #property-description-con{
+      grid-column-start: 1;
+      grid-column-end:5;
+    }
+
+    .button-group input[type="radio"] {
+        display: none;
+    }
+    
+    .button-group label {
+        display: inline-block;
+        font-weight: 400;
+        padding: 10px 20px;
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-right: 10px;
+    }
+    
+    .button-group input[type="radio"]:checked + label {
+        background-color: var(--primary-bg);
+        color: white;
+        border-color: #007bff;
+    }
+    
+    .button-group label:hover {
+        background-color: #f0f0f0;
+    }
+  }

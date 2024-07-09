@@ -1,0 +1,101 @@
+#features-form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+  
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    row-gap: 40px;
+
+    input[type='checkbox']{
+      height: 20px;
+      width: 20px;
+    }
+
+    #non-veg{
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    #pets-allowed{
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    #electricity{
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    #water-supply{
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+    hr{
+      grid-column-start: 1;
+      grid-column-end: 5;
+    }
+    #furnishing{
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+    #additional-features{
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+    #tiles{
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+    #safety{
+      grid-column-start: 1;
+      grid-column-end: 5;
+      .button-group{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .button-group{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      row-gap: 20px;
+      div{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        label{
+          font-weight: 400;
+        }
+      }
+    }
+
+    .amenities-grid{
+      grid-column-start: 1;
+      grid-column-end: 5;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 20px;
+
+      h2{
+        grid-column-start: 1;
+        grid-column-end: 5;
+      }
+      .amenity-item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+        padding: 20px;
+
+        img{
+          width: 32px;
+        }
+        label{
+          color: var(--border-color);
+          font-size: 0.8rem;
+        }
+      }
+    }
+    
+  }

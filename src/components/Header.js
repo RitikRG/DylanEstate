@@ -3,6 +3,7 @@ import logo from '../assets/logo.svg';
 import language from '../assets/language.svg';
 import user from '../assets/user.svg';
 import ver_line from '../assets/ver_line.svg';
+import '../css/navbar.css';
 
 const Header =()=>{
     return (

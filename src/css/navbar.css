@@ -1,0 +1,39 @@
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background-color: var(--secondary-bg);
+    padding: 1rem 4rem;
+  }
+  
+  .logo a {
+    display: flex;
+    align-items: baseline;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 3rem;
+    
+  }
+  
+  .nav-links li {
+    ul{
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+  
+  .nav-links a {
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  
+  
+  

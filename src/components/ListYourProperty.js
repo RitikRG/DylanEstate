@@ -1,7 +1,17 @@
 import React, { useState } from "react";
 import notification from '../assets/notification.svg';
 import GoogleMapComponent from "./GoogleMapComponent";
+
+import '../css/listYourProperty.css';
+import '../css/propertyDetails.css';
+import '../css/locationDetails.css';
+import '../css/featuresDetails.css';
+import '../css/priceDetails.css';
+import '../css/propertyPhotos.css';
 import '../css/modal.css';
+import '../css/confirmationPage.css';
+import PreviewListing from "./PreviewListing";
+
 
 const ListYourProperty =()=>{
 
@@ -61,8 +71,6 @@ const ListYourProperty =()=>{
         setSelections(updatePhotoSelection(e,selections));
     };
 
-    const [previewImages, setPreviewImages] = useState('ok');
-
     const setNavClass =(curTab, tabNum)=>{
         if(curTab==tabNum){
             return 'active-tab';
@@ -76,7 +84,7 @@ const ListYourProperty =()=>{
     const [formSectionClass, setFormSectionClass]=useState(['','sub-form','hide','hide','hide','hide'])
     
     const updateFormSection=(formSectionClass)=>{
-        // console.log(curTab);
+        console.log(curTab);
         for(let i=1;i<6;i++){
             if(i==curTab+1){
                 formSectionClass[i]='sub-form';
@@ -86,9 +94,46 @@ const ListYourProperty =()=>{
         }
         return formSectionClass;
     }
-    const handleSubmit=()=>{
+    const handleNext=()=>{
         setCurTab(curTab+1);
         setFormSectionClass(updateFormSection(formSectionClass));
+        // console.log(formSectionClass);
+    }
+    const handleNavClick=(e)=>{
+        let id = e.target.id;
+        let tab;
+        switch(id){
+            case 'nav-1':
+                setCurTab(1);
+                tab=1;
+                break;
+            case 'nav-2':
+                setCurTab(2);
+                tab=2;
+                break;
+            case 'nav-3':
+                setCurTab(3);
+                tab=3;
+                break;
+            case 'nav-4':
+                setCurTab(4);
+                tab=4;
+                break;
+            case 'nav-5':
+                setCurTab(5);
+                tab=5;
+                break;
+        };
+
+        let newFormSectionClass=[];
+        for(let i=1;i<6;i++){
+            if(i==tab){
+                newFormSectionClass[i]='sub-form';
+            }else{
+                newFormSectionClass[i]='hide';
+            }
+        }
+        setFormSectionClass(newFormSectionClass)
         // console.log(formSectionClass);
     }
     const [propTypeSelectionClass, setpropTypeSelectionClass]=useState(['hide','hide'])
@@ -130,20 +175,33 @@ const ListYourProperty =()=>{
     const finalSubmit=()=>{
         setContainerSymbol('hide');
         setOverlayVisible('hide');
+        setConfirmationPage('confirmation-page');
         console.log(selections);
     }
 
+    const [confirmationPage, setConfirmationPage] = useState('hide');
+
+    const editListing=()=>{
+        setContainerSymbol('listPropertyContainer');
+        setOverlayVisible('hide');
+        setConfirmationPage('hide');
+    }
+    const [previewPage, setPreviewPage] = useState('hide');
+    const showPreview=()=>{
+        setPreviewPage('');
+        setConfirmationPage('hide');
+    } 
 
     return(
         <>
             <a href="#" className="notification-holder" onClick={printSelection}><img src={notification}></img></a>
             <div className={containerSymbol}>
                 <div className="lp-nav">
-                    <p className={setNavClass(curTab,1)}>PROPERTY DETAILS</p>
-                    <p className={setNavClass(curTab,2)}>LOCATION DETAILS</p>
-                    <p className={setNavClass(curTab,3)}>FEATURES & AMENITIES</p>
-                    <p className={setNavClass(curTab,4)}>PRICE DETAILS</p>
-                    <p className={setNavClass(curTab,5)}>PROPERTY IMAGES</p>
+                    <p className={setNavClass(curTab,1)} onClick={handleNavClick} id='nav-1'>PROPERTY DETAILS</p>
+                    <p className={setNavClass(curTab,2)} onClick={handleNavClick} id='nav-2'>LOCATION DETAILS</p>
+                    <p className={setNavClass(curTab,3)} onClick={handleNavClick} id='nav-3'>FEATURES & AMENITIES</p>
+                    <p className={setNavClass(curTab,4)} onClick={handleNavClick} id='nav-4'>PRICE DETAILS</p>
+                    <p className={setNavClass(curTab,5)} onClick={handleNavClick} id='nav-5'>PROPERTY IMAGES</p>
                 </div>
                 <div className="lp-form">
                 <form onSubmit={(e)=>{e.preventDefault()}}>
@@ -627,7 +685,7 @@ const ListYourProperty =()=>{
                     {/* form footer */}
                     <div className="lp-footer">
                         <p className="help-text">Need Help? <strong>Call 9999999999</strong> </p>
-                        {curTab>=5?<button className="btn"  onClick={openOverlay} type="Submit">SAVE & POST</button>:<button className="btn" onClick={handleSubmit}>Next</button>}
+                        {curTab>=5?<button className="btn"  onClick={openOverlay} type="Submit">SAVE & POST</button>:<button className="btn" onClick={handleNext}>Next</button>}
                     </div>
                 </form>
                 </div>
@@ -638,6 +696,23 @@ const ListYourProperty =()=>{
                     <button className={"modal-button"} onClick={finalSubmit}>Continue</button>
                     <p>By continuing you agree to our <a href="/terms">Terms and Conditions & Privacy Policy</a></p>
                 </div>
+            </div>
+            <div className={confirmationPage}>
+                <h2 className="confirmation-title">Thank you for listing your property with us,</h2>
+                <p className="confirmation-message">
+                    Your listing will be reviewed and will go live within 24 hours.
+                </p>
+                <p className="confirmation-message">
+                    We will now manage your listing and get in touch with you after finding the best suitable tenant as per your preference.
+                </p>
+                <p className="confirmation-signature">-Dylan Estates</p>
+                <div className="confirmation-button-container">
+                    <button className="btn" onClick={editListing}>Edit Property Listing</button>
+                    <button className="btn" onClick={showPreview}>Preview Property Listing</button>
+                </div>
+            </div>
+            <div className={previewPage}>
+                {PreviewListing(selections)}
             </div>
         </>
     )

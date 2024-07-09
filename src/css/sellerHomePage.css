@@ -1,0 +1,194 @@
+
+.sellerContainer {
+    height: 77vh;
+    background-color: var(--primary-bg);
+    padding: 4rem 8rem;
+    color: #fff;
+  }
+  
+  .sellerContainer .upper-section{
+    margin-bottom: 4rem;
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+  }
+  .sellerContainer .lower-section{
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem 3rem;
+  
+    .left-section {
+      width: 45%;
+      padding: 2rem;
+  
+      h2{
+        font-weight: 500;
+        margin-bottom: 14px;
+      }
+      p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+      }
+      .steps {
+        list-style: none;
+        padding: 0;
+  
+        li {
+          font-size: 1rem;
+          margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+  
+          .checkmark {
+            margin-right: 8px;
+          }
+  
+          strong{
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+  }
+  
+  .sellerContainer .right-section {
+    height: fit-content;
+    width: 45%;
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    .form-container{
+      background-color: var(--secondary-bg);
+      h2 {
+        font-size: 1.2rem;
+        font-weight: 400;
+        padding: 20px 50px;
+      }
+    
+      form {
+        height: 200px;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        padding: 20px 50px;
+        padding-right: 80px;
+        background-color: #fff;
+  
+        label {
+          font-size: 1rem;
+          margin-bottom: 10px;
+          margin-left: 2px;
+          margin-top: 10px;
+        }
+        .radio-group{
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 30px;
+          label{
+            margin-left: 20px;
+          }
+          div{
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+          }
+        }
+        .phone-group{
+          display: flex;
+  
+          select{
+            max-width: 16%;
+          }
+        }
+        
+        input{
+          padding: 10px;
+          margin-bottom: 20px;
+          border: 1px solid var(--border-color);
+          border-radius: 2px;
+        }
+        select{
+          padding: 9px;
+          margin-bottom: 20px;
+          margin-right: 2px;
+          border: 1px solid var(--border-color);
+          border-radius: 2px;
+        }
+  
+        button {
+          padding: 10px;
+          background-color: #0c2d48;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+  
+        button:hover {
+          background-color: #1a466a;
+        }
+  
+        .required {
+          color: red;
+        }
+      
+      }
+  
+      .otpContainer{
+        background-color: #fff;
+        padding: 50px;
+        div{
+          display: flex;
+          justify-content: space-between;
+          align-items: bas;
+          margin-bottom: 30px;
+          h2{
+            padding: 0px;
+          }
+          a{
+            font-size: 0.8rem;
+            color: var(--border-color);
+          }
+        }
+        .required {
+          color: red;
+        }
+      }
+      input{
+        display: block;
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+      a{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        color: var(--border-color);
+        text-decoration: none;
+        font-size: 0.8rem;
+        margin-bottom: 50px;
+      }
+  
+      .form-footer{
+        font-size: 0.8rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        color: var(--border-color);
+        strong{
+          color: #000;
+        }
+      }
+    } 
+  }
+  
+  
+  

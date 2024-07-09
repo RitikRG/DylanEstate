@@ -1,0 +1,120 @@
+/* List your property */
+
+.notification-holder{
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+  }
+  .listPropertyContainer{
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    /* List your property */
+    .lp-nav{
+      background-color: var(--secondary-bg);
+      display: flex;
+      justify-content: space-between;
+      p{
+        padding: 30px;
+        font-size: 0.9rem;
+        text-align: center;
+        border-bottom: 8px solid var(--border-color);
+      }
+      p:hover{
+        cursor: pointer;
+      }
+      .active-tab{
+        color: black;
+        background-color: var(--selected-blue);
+      }
+      .non-active-tab{
+        color: var(--border-color);
+      }
+      .completed-tab{
+        color: var(--primary-bg);
+        border-bottom: 8px solid var(--primary-bg);
+      }
+    }
+    .sub-form{
+      height: 300px;
+      overflow-y: scroll;
+    }
+
+    .required {
+      color: red;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 10px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+    .form-group div.radio-group{
+      margin-top: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .form-group div.radio-group label{
+      display: inline;
+      font-weight: 400;
+    }
+    
+    .form-group input[type="number"],
+    .form-group input[type="text"],
+    .form-group textarea,
+    .form-group select {
+        width: calc(100% - 10px);
+        padding: 8px;
+        margin-right: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    
+    .form-group input[type="radio"] {
+        margin-right: 5px;
+    }
+    
+    .form-group textarea {
+        height: 100px;
+    }
+
+    .google-map-con{
+      grid-column-start: 1;
+      grid-column-end:3;
+      label{
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding-bottom: 10px;
+      }
+    }
+
+    .lp-footer{
+      background-color: var(--primary-bg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      padding: 10px 30px;
+      font-size: 0.9rem;
+    }
+  }
+
+ 
+
+
+
+
+
+.hide{
+  display: none!important;
+}

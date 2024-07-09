@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import checkmark from '../assets/checkmark.svg';
+import '../css/sellerHomePage.css'
 
 const SellerHomepage=()=>{
 

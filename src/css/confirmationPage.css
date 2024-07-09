@@ -1,0 +1,32 @@
+/* ThankYouMessage.css */
+
+.confirmation-page {
+    padding: 20px;
+    max-width: 600px;
+    margin: 40px;
+    border-radius: 10px;
+  }
+  
+  .confirmation-title {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  
+  .confirmation-message {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .confirmation-signature {
+    font-size: 14px;
+    color: #007bff;
+    margin-top: 40px;
+  }
+  
+  .confirmation-button-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 40px;
+  }
+  
