@@ -10,58 +10,17 @@ import '../css/priceDetails.css';
 import '../css/propertyPhotos.css';
 import '../css/modal.css';
 import '../css/confirmationPage.css';
-import PreviewListing from "./PreviewListing";
+import '../css/previewListingPage.css';
+import SelectionList from "./SelectionList";
 
 
 const ListYourProperty =()=>{
 
     const [curTab, setCurTab] = useState(1);
 
-    const [selections, setSelections]=useState(
-        {
-            "features": [],
-            "tiles": "None",
-            "safety": [],
-            "amenities": [],
-            "photos": [],
-            "property_for": "",
-            "property_type": "",
-            "built_up_area": "0",
-            "carpet_area": "",
-            "property_on_floor": "Ground",
-            "total_floors": "None",
-            "property_facing": "",
-            "bathrooms_toilets": "None",
-            "balcony": "None",
-            "tenant_preference": "Not Given",
-            "availability": "",
-            "property_description": "",
-            "building-society-name": "",
-            "locality-area": "",
-            "landmark-street-name": "",
-            "city": "",
-            "non_veg": "Not Given",
-            "pets_allowed": "Not Given",
-            "electricity": "",
-            "water_supply": "",
-            "furnishing": "None",
-            "rent": "",
-            "security": "",
-            "maintainance-cost": "",
-            "maintainance-period": "",
-            "bhk_type":"None",
-            "property_age":""
-
-        }
-    );
+    const [selections, setSelections]=SelectionList();
     
-
     const [showMaintainance, setShowMaintainance] = useState('hide');
-
-    // const propDetailSelections={};
-    // const locationDetailSelections={};
-    // const featuresDetailSelections={};
-    // const priceDetailSelections={};
 
     const updateSelection=(e, selections)=>{
         selections[e.target.name]= e.target.value;
@@ -74,12 +33,12 @@ const ListYourProperty =()=>{
 
     const updateCheckboxSelection=(e, selections)=>{
         let prevVal = selections[e.target.name];
-        selections[e.target.name]= [...prevVal, e.target.value];
+        selections[e.target.name]= [...prevVal, e.target.parentNode];
         return selections;
     }
 
     const handleCheckboxSelection=(e)=>{
-        console.log(e.target.checked);
+        // console.log(e.target.parentNode);
         if(e.target.checked){
             setSelections(updateCheckboxSelection(e,selections));
         }
@@ -188,6 +147,7 @@ const ListYourProperty =()=>{
 
     const printSelection=()=>{
         console.log(selections);
+        console.log(forSale);
     }
 
     const [overlayVisible, setOverlayVisible] = useState('hide');
@@ -218,10 +178,37 @@ const ListYourProperty =()=>{
         setConfirmationPage('hide');
     }
     const [previewPage, setPreviewPage] = useState('hide');
+    
+    const amenitiesContainer = document.getElementById('property-amenities-container');
     const showPreview=()=>{
         setPreviewPage('');
         setConfirmationPage('hide');
+        const amenitiesList = selections['amenities'];
+        amenitiesList.forEach(element=>{amenitiesContainer.appendChild(element)});
     } 
+    const [forSale,setForSale]=useState(false);
+    const handleSale=(e)=>{
+        setForSale(true);
+        handleSelections(e);
+    }
+
+    const showPreviewPage =()=>{
+        console.log(selections);
+    }
+
+    const [currentImage, setCurrentImage] = useState(0);
+    const images =[];
+    Array.from(selections['photos']).forEach(element=>{
+        images.push(URL.createObjectURL(element));
+    });
+
+    const nextImage = () => {
+        setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+    };
+
+    const prevImage = () => {
+        setCurrentImage((prevImage) => (prevImage - 1 + images.length) % images.length);
+    };
 
     return(
         <>
@@ -240,8 +227,8 @@ const ListYourProperty =()=>{
                             <div className="form-group"  id="property_for">
                                 <label><span className="required">*</span>Property For:</label>
                                 <div className="radio-group">
-                                    <div><input type="radio" name="property_for" value="Rent" id="Rent" onInput={handleSelections}/><label for='Rent'> Rent</label></div>
-                                    <div><input type="radio" name="property_for" value="Sale" id="Sale" onInput={handleSelections}/><label for='Sale'> Sale</label></div>
+                                    <div><input type="radio" name="property_for" value="Rent" id="Rent" onInput={handleSelections} /><label for='Rent'> Rent</label></div>
+                                    <div><input type="radio" name="property_for" value="Sale" id="Sale" onInput={handleSale}/><label for='Sale'> Sale</label></div>
                                 </div>
                                 
                             </div>
@@ -660,6 +647,31 @@ const ListYourProperty =()=>{
 
                     {/* Price Details */}
                     <div className={formSectionClass[4]} id="price-details">
+                        {forSale?<>
+                            <div className="form-group" id="rent-con">
+                                <label for="rent">Sale Price<span class="required">*</span></label>
+                                <input type="text" id="rent" name="rent" placeholder="₹" onInput={handleSelections}/>
+                            </div>
+                            <div className="form-group" id="maintainance-con">
+                                <label for="maintainance">Maintenance<span class="required">*</span></label>
+                                <select id="maintainance" name="maintainance" onChange={maintainanceCostContainer}>
+                                    <option>None</option>
+                                    <option value='extra'>Extra Maintenance</option>
+                                </select>
+                            </div>
+
+                            <div className={showMaintainance} id="maintainance-cost-con">
+                                <label for="maintainance-cost">Maintainance Cost</label>
+                                <input type="text" id="maintainance-cost" name="maintainance-cost" placeholder="₹" onInput={handleSelections}/>
+                                <select id="maintainance-period" name="maintainance-period" onInput={handleSelections}>
+                                    <option>Monthly</option>
+                                    <option>Quaterly</option>
+                                    <option>Annually</option>
+                                </select>
+                            </div>
+                        
+                        </>:
+                        <>
                             <div className="form-group" id="rent-con">
                                 <label for="rent">Rent<span class="required">*</span></label>
                                 <input type="text" id="rent" name="rent" placeholder="₹/Month" onInput={handleSelections}/>
@@ -686,6 +698,8 @@ const ListYourProperty =()=>{
                                     <option>Annually</option>
                                 </select>
                             </div>
+                        </>}
+                
 
                             
                             <div className="additional-pricing-detail-con">
@@ -743,10 +757,309 @@ const ListYourProperty =()=>{
                 </div>
             </div>
             <div className={previewPage}>
-                {PreviewListing(selections)}
+                <div className="preview-property-details">
+                    <div className="preview-property-container">
+                        <h1>{selections['bhk_type']} {selections['property_type']} For {selections['property_for']} in {selections['building-society-name']} ({selections['built_up_area']} Sq.ft.)</h1>
+                        <p><img src="https://img.icons8.com/ios-filled/50/000000/marker.png" />{selections['building-society-name']} {selections["locality-area"]}, near {selections["landmark-street-name"]}</p>
+                        <div className="carousel">
+                            <button className="carousel-button prev-button" onClick={prevImage}>
+                            &lt;
+                            </button>
+                            <img src={images[currentImage]} alt="Property" className="carousel-image" />
+                            <button className="carousel-button next-button" onClick={nextImage}>
+                            &gt;
+                            </button>
+                        </div>
+
+                        {/* Property Overview */}
+                        <div className="property-overview">
+                            <div className="property-overview-heading">
+                                <h2>Property Overview</h2>
+                                <p className="society-name">Society: {selections['building-society-name']}</p>
+                            </div>
+                            <div className="overview-grid">
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/ios/50/bed.png" alt="bedrooms icon" />
+                                    <div>
+                                        <span>{selections['bhk_type']}</span>
+                                        <p>Bedrooms</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/cotton/64/shower-and-tub--v1.png" alt="bathrooms icon" />
+                                    <div>
+                                        <span>{selections['bathrooms_toilets']}</span>
+                                        <p>Bathrooms</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/metro/26/area-chart.png" alt="sq ft icon" />
+                                    <div>
+                                        <span>{selections['built_up_area']}</span>
+                                        <p>Sq. Ft.</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/fluency-systems-regular/48/skyscrapers.png" alt="floor icon" />
+                                    <div>
+                                        <span>{selections['property_on_floor']}</span>
+                                        <p>Property on Floor</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/fluency-systems-regular/48/skyscrapers.png" alt="total floors icon" />
+                                    <div>
+                                        <span>{selections['total_floors']}</span>
+                                        <p>Total Floors</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/ios/50/compass--v1.png" alt="facing icon" />
+                                    <div>
+                                        <span>{selections['property_facing']}</span>
+                                        <p>Facing</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/ios/50/balcony.png" alt="balcony icon" />
+                                    <div>
+                                        <span>{selections['balcony']}</span>
+                                        <p>Balcony</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/badges/48/sofa.png" alt="furnishing icon" />
+                                    <div>
+                                        <span>{selections['furnishing']}</span>
+                                        <p>Furnishing</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/windows/32/family--v1.png" alt="tenant preference icon" />
+                                    <div>
+                                        <span>{selections['tenant_preference']}</span>
+                                        <p>Tenant Preference</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/external-tile-building-and-construction-flatart-icons-outline-flatarticons-1.png" alt="flooring icon" />
+                                    <div>
+                                        <span>{selections['tiles']}</span>
+                                        <p>Flooring</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/ios-filled/50/signing-a-document.png" alt="availability icon" />
+                                    <div>
+                                        <span>{selections['availability']}</span>
+                                        <p>Availability</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/pastel-glyph/64/water.png" alt="water supply icon" />
+                                    <div>
+                                        <span>{selections['water_supply']}</span>
+                                        <p>Water Supply</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/carbon-copy/100/dog-footprint.png" alt="pets allowed icon" />
+                                    <div>
+                                        <span>{selections['pets_allowed']}</span>
+                                        <p>Pets Allowed</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/ios/50/soup-plate.png" alt="non-veg icon" />
+                                    <div>
+                                        <span>{selections['non_veg']}</span>
+                                        <p>Non-Veg</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/ios/50/electro-devices.png" alt="electricity status icon" />
+                                    <div>
+                                        <span>{selections['electricity']}</span>
+                                        <p>Electricity Status</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/ios/50/age.png" alt="property age icon" />
+                                    <div>
+                                        <span>{selections['property_age']}</span>
+                                        <p>Property Age</p>
+                                    </div>
+                                </div>
+                                    <div className="overview-item">
+                                    <img src="https://img.icons8.com/ios/50/building.png" alt="property type icon" />
+                                    <div>
+                                        <span>{selections['property_type']}</span>
+                                        <p>Property Type</p>
+                                    </div>
+                                </div>
+                                <div className="overview-item">
+                                    <img src="https://img.icons8.com/ios/50/security-guard.png"  alt="gated security icon" />
+                                    <div>
+                                        <span>{selections['safety'].includes('24/7 Security personnel (Gated Security)')?"Yes":"No"}</span>
+                                        <p>Gated Security</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Amenities */}
+                        <div className="property-amenities">
+                            <h2>Amenities</h2>
+                            <div id="property-amenities-container">
+                                
+                            </div>
+                        </div>
+
+                        {/* Descriprion */}
+                        <div className="property-preview-description">
+                            <h2>Description</h2>
+                            <p>{selections['property_description']}</p>
+                        </div>
+
+                    </div>
+                
+                    <div className="property-info">
+                        <div className="rent-details">
+                            {selections['property_for']=="Rent"?<><div className="rent"><p>₹ {selections['rent']} / Month</p><p>(Rent-Negotiable)</p></div>
+                                <div className="deposit">₹ {selections['security']} (Deposit)</div></>:<div className="sale"><p>₹ {selections['rent']}</p><p>(Sale Price)</p></div>}
+                        
+                        </div>
+                        <div className="inquiry-form">
+                        <h2>Send an Inquiry for this property?</h2>
+                        <p>Contact Person: Melvin Lasrado</p>
+                        <p>
+                            <i className="fas fa-phone"></i> +91-9999999999
+                        </p>
+                        <form>
+                            <div className="preview-property-form-group">
+                            <input type="text" name="name" placeholder="Name" required />
+                            </div>
+                            <div className="preview-property-form-group">
+                            <input type="email" name="email" placeholder="Email" required />
+                            </div>
+                            <div className="preview-property-form-group">
+                            <input type="tel" name="phone" placeholder="+91 999-999-9999" />
+                            </div>
+                            <div className="preview-property-form-group">
+                            <textarea
+                                name="message"
+                                placeholder={`I would like more information about ${selections['building-society-name']}, ${selections["locality-area"]}`}
+                            ></textarea>
+                            </div>
+                            <button type="submit" className="btn">
+                                SEND INQUIRY
+                            </button>
+                        </form>
+                        </div>
+                    </div>
+
+                    {/* Review Section */}
+                    <div className="ratings-reviews">
+                            <h2>Ratings & Reviews</h2>
+                            <div class="reviews-container">
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <img src="https://img.icons8.com/fluency-systems-filled/48/user.png" alt="user avatar"/>
+                                    <div class="review-user-info">
+                                        <h3>Aishwarya Malik</h3>
+                                        <p>Tenant (8 months)</p>
+                                    </div>
+                                    <div class="review-rating">
+                                        <span>4.5</span>
+                                        <img src="https://img.icons8.com/ios-glyphs/30/star--v1.png" alt="star"/>
+                                    </div>
+                                </div>
+                                <div class="review-content">
+                                <h4>Good Society</h4>
+                                <p>The garden view is mesmerizing, the exposure of natural light is good. Easy access to stores, markets and schools.</p>
+                                </div>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header">
+                                <img src="https://img.icons8.com/fluency-systems-filled/48/user.png" alt="user avatar"/>
+                                <div class="review-user-info">
+                                    <h3>Rajendra Prasad</h3>
+                                    <p>Owner (10+ years)</p>
+                                </div>
+                                <div class="review-rating">
+                                    <span>4.5</span>
+                                    <img src="https://img.icons8.com/ios-glyphs/30/star--v1.png" alt="star"/>
+                                </div>
+                                </div>
+                                <div class="review-content">
+                                <h4>Good Society & Apartment</h4>
+                                <p>With its thoughtfully designed apartments, power backup, and 24×7 security, it offers a secure and worry-free living experience. Easy access to stores, markets and schools....</p>
+                                <a href="#" class="show-more">Show more</a>
+                                </div>
+                            </div>
+                            </div>
+                            <button class="btn">Write a Review</button>
+                    </div>
+
+                    {/* Similar Property */}
+                    <div class="similar-properties">
+                        <h2>Similar Properties in {selections['locality-area']}</h2>
+                        <div className="properties-container">
+                            <div className="property-card">
+                                <img src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg" alt="Property Image"/>
+                                <div class="property-info">
+                                <h3>Modern & Luxury 2BHK Flat For Rent</h3>
+                                <p><img src="https://img.icons8.com/ios-filled/20/000000/place-marker.png" alt="Location icon"/>{selections['locality-area']},{selections['city']}</p>
+                                <p><img src="https://img.icons8.com/ios-filled/20/000000/rupee.png" alt="Price icon"/> 60.50 Lac</p>
+                                <p><img src="https://img.icons8.com/ios-filled/20/000000/area-chart.png" alt="Area icon"/> 1850 Sq. ft.</p>
+                                </div>
+                            </div>
+                            <div className="property-card">
+                                <img src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg" alt="Property Image"/>
+                                <div class="property-info">
+                                <h3>Modern & Luxury 2BHK Flat For Rent</h3>
+                                <p><img src="https://img.icons8.com/ios-filled/20/000000/place-marker.png" alt="Location icon"/>{selections['locality-area']},{selections['city']}</p>
+                                <p><img src="https://img.icons8.com/ios-filled/20/000000/rupee.png" alt="Price icon"/> 60.50 Lac</p>
+                                <p><img src="https://img.icons8.com/ios-filled/20/000000/area-chart.png" alt="Area icon"/> 1850 Sq. ft.</p>
+                                </div>
+                            </div>
+                            <div className="property-card">
+                                <img src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg" alt="Property Image"/>
+                                <div class="property-info">
+                                <h3>Modern & Luxury 2BHK Flat For Rent</h3>
+                                <p><img src="https://img.icons8.com/ios-filled/20/000000/place-marker.png" alt="Location icon"/>{selections['locality-area']},{selections['city']}</p>
+                                <p><img src="https://img.icons8.com/ios-filled/20/000000/rupee.png" alt="Price icon"/> 60.50 Lac</p>
+                                <p><img src="https://img.icons8.com/ios-filled/20/000000/area-chart.png" alt="Area icon"/> 1850 Sq. ft.</p>
+                                </div>
+                            </div>
+                            <div className="property-card">
+                                <img src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg" alt="Property Image"/>
+                                <div class="property-info">
+                                <h3>Modern & Luxury 2BHK Flat For Rent</h3>
+                                <p><img src="https://img.icons8.com/ios-filled/20/000000/place-marker.png" alt="Location icon"/>{selections['locality-area']},{selections['city']}</p>
+                                <p><img src="https://img.icons8.com/ios-filled/20/000000/rupee.png" alt="Price icon"/> 60.50 Lac</p>
+                                <p><img src="https://img.icons8.com/ios-filled/20/000000/area-chart.png" alt="Area icon"/> 1850 Sq. ft.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* About Section */}
+                    <div className="about-section">
+                        <h2>About {selections['locality-area']}</h2>
+                            <div className="about-content">
+                                <p>Spread over {selections['carpet_area']} sqft. this home is an ideal place to live in. Access to bus station & medical stores is very easy & convenient from this house.</p>
+                                <p>If you are a frequent traveller, then you'll be happy to note that train station is less than 10 minutes from this house. With PVR Cinemas - {selections['locality-area']}, Maxus Cinemas & INOX close by, you can catch your favourite movies running & never worry about missing a show because of traffic.</p>
+                                <p>Never miss out on lifestyle as Rassaz Mall......</p>
+                                <a href="#" className="show-more">Show more</a>
+                            </div>
+                        <button className="btn">Write a Review</button>
+                    </div>
+                </div>
             </div>
         </>
     )
 }
+
 
 export default ListYourProperty;
