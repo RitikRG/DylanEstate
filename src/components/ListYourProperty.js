@@ -17,13 +17,44 @@ const ListYourProperty =()=>{
 
     const [curTab, setCurTab] = useState(1);
 
-    const [selections, setSelections]=useState({
-        'features':[],
-        'tiles':[],
-        'safety':[],
-        'amenities':[],
-        'photos':[]
-    });
+    const [selections, setSelections]=useState(
+        {
+            "features": [],
+            "tiles": "None",
+            "safety": [],
+            "amenities": [],
+            "photos": [],
+            "property_for": "",
+            "property_type": "",
+            "built_up_area": "0",
+            "carpet_area": "",
+            "property_on_floor": "Ground",
+            "total_floors": "None",
+            "property_facing": "",
+            "bathrooms_toilets": "None",
+            "balcony": "None",
+            "tenant_preference": "Not Given",
+            "availability": "",
+            "property_description": "",
+            "building-society-name": "",
+            "locality-area": "",
+            "landmark-street-name": "",
+            "city": "",
+            "non_veg": "Not Given",
+            "pets_allowed": "Not Given",
+            "electricity": "",
+            "water_supply": "",
+            "furnishing": "None",
+            "rent": "",
+            "security": "",
+            "maintainance-cost": "",
+            "maintainance-period": "",
+            "bhk_type":"None",
+            "property_age":""
+
+        }
+    );
+    
 
     const [showMaintainance, setShowMaintainance] = useState('hide');
 
@@ -261,7 +292,7 @@ const ListYourProperty =()=>{
                             
                             <div className="form-group" id="property-on-floor-con">
                                 <label for="property-on-floor">Property on Floor<span className="required">*</span></label>
-                                <input type="number" id="property-on-floor" name="property_on_floor" onInput={handleSelections}/>
+                                <input type="text" id="property-on-floor" name="property_on_floor" onInput={handleSelections}/>
                             </div>
                             
                             <div className="form-group" id="total-floors-con">
@@ -287,11 +318,11 @@ const ListYourProperty =()=>{
                             <div className="form-group" id="property_age">
                                 <label><span className="required">*</span>Property Age:</label>
                                 <div className="button-group">
-                                    <input type="radio" name="property_age" value="Less than 1 Year" id="less-than-one"/><label for="less-than-one" onInput={handleSelections}>Less than 1 Year</label> 
-                                    <input type="radio" name="property_age" value="1-3 Years" id="one-to-three" /><label for="one-to-three" onInput={handleSelections}> 1-3 Years</label>
-                                    <input type="radio" name="property_age" value="3-5 Years" id="three-to-five" /><label for="three-to-five" onInput={handleSelections}> 3-5 Years</label>
-                                    <input type="radio" name="property_age" value="5-10 Years" id="five-to-ten" /><label for="five-to-ten" onInput={handleSelections}> 5-10 Years</label>
-                                    <input type="radio" name="property_age" value="Greater than 10 Years" id="ten-plus" /><label for="ten-plus" onInput={handleSelections}> Greater than 10 Years</label>
+                                    <input type="radio" name="property_age" value="Less than 1 Year" id="less-than-one"onInput={handleSelections}/><label for="less-than-one" >Less than 1 Year</label> 
+                                    <input type="radio" name="property_age" value="1-3 Years" id="one-to-three" onInput={handleSelections}/><label for="one-to-three" > 1-3 Years</label>
+                                    <input type="radio" name="property_age" value="3-5 Years" id="three-to-five" onInput={handleSelections}/><label for="three-to-five"> 3-5 Years</label>
+                                    <input type="radio" name="property_age" value="5-10 Years" id="five-to-ten" onInput={handleSelections}/><label for="five-to-ten"> 5-10 Years</label>
+                                    <input type="radio" name="property_age" value="Greater than 10 Years" id="ten-plus" onInput={handleSelections}/><label for="ten-plus"> Greater than 10 Years</label>
                                 </div>
                                 
                             </div>
@@ -299,12 +330,12 @@ const ListYourProperty =()=>{
                             <div className="form-group" id="bhk_type">
                                 <label><span className="required">*</span>BHK Type:</label>
                                 <div className="button-group">
-                                    <input type="radio" name="bhk_type" value="1 RK" id="one-rk" /><label for="one-rk" onInput={handleSelections}>1 RK</label> 
-                                    <input type="radio" name="bhk_type" value="1 BHK" id="one-bhk" /><label for="one-bhk" onInput={handleSelections}> 1 BHK</label>
-                                    <input type="radio" name="bhk_type" value="2 BHK" id="two-bhk" /><label for="two-bhk" onInput={handleSelections}> 2 BHK</label>
-                                    <input type="radio" name="bhk_type" value="3 BHK" id="three-bhk" /><label for="three-bhk" onInput={handleSelections}> 3 BHK</label>
-                                    <input type="radio" name="bhk_type" value="4 BHK" id="four-bhk" /><label for="four-bhk" onInput={handleSelections}> 4 BHK</label>
-                                    <input type="radio" name="bhk_type" value="5+ BHK" id="five-bhk" /><label for="five-bhk" onInput={handleSelections}> 5+ BHK</label>
+                                    <input type="radio" name="bhk_type" value="1 RK" id="one-rk" onInput={handleSelections}/><label for="one-rk" >1 RK</label> 
+                                    <input type="radio" name="bhk_type" value="1 BHK" id="one-bhk" onInput={handleSelections}/><label for="one-bhk" > 1 BHK</label>
+                                    <input type="radio" name="bhk_type" value="2 BHK" id="two-bhk" onInput={handleSelections}/><label for="two-bhk" > 2 BHK</label>
+                                    <input type="radio" name="bhk_type" value="3 BHK" id="three-bhk" onInput={handleSelections}/><label for="three-bhk" > 3 BHK</label>
+                                    <input type="radio" name="bhk_type" value="4 BHK" id="four-bhk" onInput={handleSelections}/><label for="four-bhk" > 4 BHK</label>
+                                    <input type="radio" name="bhk_type" value="5+ BHK" id="five-bhk" onInput={handleSelections}/><label for="five-bhk"> 5+ BHK</label>
                                 </div>
                             </div>
                             
@@ -501,9 +532,9 @@ const ListYourProperty =()=>{
                             <div className="form-group" id="tiles">
                                 <label>Tiles:</label>
                                 <div className="button-group">
-                                    <div><input type="checkbox" name="tiles" value="Normal White Tiles" id="normal-tiles" onInput={handleCheckboxSelection}/><label for="normal-tiles"> Normal White Tiles</label></div>
-                                    <div><input type="checkbox" name="tiles" value="Marble" id="marble" onInput={handleCheckboxSelection}/><label for="marble" > Marble</label></div>
-                                    <div><input type="checkbox" name="tiles" value="Vitrified Tiles" id="vitrified-tiles" onInput={handleCheckboxSelection}/><label for="vitrified-tiles"> Vitrified Tiles</label></div>
+                                    <div><input type="radio" name="tiles" value="Normal White Tiles" id="normal-tiles" onInput={handleSelections}/><label for="normal-tiles"> Normal White Tiles</label></div>
+                                    <div><input type="radio" name="tiles" value="Marble" id="marble" onInput={handleSelections}/><label for="marble" > Marble</label></div>
+                                    <div><input type="radio" name="tiles" value="Vitrified Tiles" id="vitrified-tiles" onInput={handleSelections}/><label for="vitrified-tiles"> Vitrified Tiles</label></div>
                                 </div>
                             </div>
 
