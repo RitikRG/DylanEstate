@@ -230,6 +230,12 @@
     }
   }
 
+/* Explore Neighborhood */
+.explore-neighbourhood{
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
 /* Review */
 .ratings-reviews {
   width:90%;

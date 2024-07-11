@@ -12,6 +12,7 @@ import '../css/modal.css';
 import '../css/confirmationPage.css';
 import '../css/previewListingPage.css';
 import SelectionList from "./SelectionList";
+import ExploreNeighbourhood from "./ExploreNeighbourhood";
 
 
 const ListYourProperty =()=>{
@@ -956,6 +957,11 @@ const ListYourProperty =()=>{
                             </button>
                         </form>
                         </div>
+                    </div>
+
+                    {/* Explore Neighbourhood */}
+                    <div className="explore-neighbourhood">
+                        {ExploreNeighbourhood(selections)};
                     </div>
 
                     {/* Review Section */}
