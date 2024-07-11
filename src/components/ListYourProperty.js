@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import notification from '../assets/notification.svg';
 import GoogleMapComponent from "./GoogleMapComponent";
-
+ 
 import '../css/listYourProperty.css';
 import '../css/propertyDetails.css';
 import '../css/locationDetails.css';
@@ -17,11 +17,82 @@ import ExploreNeighbourhood from "./ExploreNeighbourhood";
 
 const ListYourProperty =()=>{
 
+    // Form sections nav and control start
+
     const [curTab, setCurTab] = useState(1);
 
+    const setNavClass =(curTab, tabNum)=>{
+        if(curTab==tabNum){
+            return 'active-tab';
+        }else if(curTab<tabNum){
+            return 'non-active-tab';
+        }else{
+            return 'completed-tab';
+        }
+    }
+
+    const [formSectionClass, setFormSectionClass]=useState(['','sub-form','hide','hide','hide','hide'])
+
+    const updateFormSection=(formSectionClass)=>{
+        console.log(curTab);
+        for(let i=1;i<6;i++){
+            if(i==curTab+1){
+                formSectionClass[i]='sub-form';
+            }else{
+                formSectionClass[i]='hide';
+            }
+        }
+        return formSectionClass;
+    }
+
+    const handleNext=()=>{
+        setCurTab(curTab+1);
+        setFormSectionClass(updateFormSection(formSectionClass));
+        // console.log(formSectionClass);
+    }
+
+    const handleNavClick=(e)=>{
+        let id = e.target.id;
+        let tab;
+        switch(id){
+            case 'nav-1':
+                setCurTab(1);
+                tab=1;
+                break;
+            case 'nav-2':
+                setCurTab(2);
+                tab=2;
+                break;
+            case 'nav-3':
+                setCurTab(3);
+                tab=3;
+                break;
+            case 'nav-4':
+                setCurTab(4);
+                tab=4;
+                break;
+            case 'nav-5':
+                setCurTab(5);
+                tab=5;
+                break;
+        };
+
+        let newFormSectionClass=[];
+        for(let i=1;i<6;i++){
+            if(i==tab){
+                newFormSectionClass[i]='sub-form';
+            }else{
+                newFormSectionClass[i]='hide';
+            }
+        }
+        setFormSectionClass(newFormSectionClass)
+        // console.log(formSectionClass);
+    }
+    // end
+
+    // Selection related controls 
+
     const [selections, setSelections]=SelectionList();
-    
-    const [showMaintainance, setShowMaintainance] = useState('hide');
 
     const updateSelection=(e, selections)=>{
         selections[e.target.name]= e.target.value;
@@ -61,72 +132,9 @@ const ListYourProperty =()=>{
     const handlePhotos = (e) => {
         setSelections(updatePhotoSelection(e,selections));
     };
-
-    const setNavClass =(curTab, tabNum)=>{
-        if(curTab==tabNum){
-            return 'active-tab';
-        }else if(curTab<tabNum){
-            return 'non-active-tab';
-        }else{
-            return 'completed-tab';
-        }
-    }
-
-    const [formSectionClass, setFormSectionClass]=useState(['','sub-form','hide','hide','hide','hide'])
     
-    const updateFormSection=(formSectionClass)=>{
-        console.log(curTab);
-        for(let i=1;i<6;i++){
-            if(i==curTab+1){
-                formSectionClass[i]='sub-form';
-            }else{
-                formSectionClass[i]='hide';
-            }
-        }
-        return formSectionClass;
-    }
-    const handleNext=()=>{
-        setCurTab(curTab+1);
-        setFormSectionClass(updateFormSection(formSectionClass));
-        // console.log(formSectionClass);
-    }
-    const handleNavClick=(e)=>{
-        let id = e.target.id;
-        let tab;
-        switch(id){
-            case 'nav-1':
-                setCurTab(1);
-                tab=1;
-                break;
-            case 'nav-2':
-                setCurTab(2);
-                tab=2;
-                break;
-            case 'nav-3':
-                setCurTab(3);
-                tab=3;
-                break;
-            case 'nav-4':
-                setCurTab(4);
-                tab=4;
-                break;
-            case 'nav-5':
-                setCurTab(5);
-                tab=5;
-                break;
-        };
-
-        let newFormSectionClass=[];
-        for(let i=1;i<6;i++){
-            if(i==tab){
-                newFormSectionClass[i]='sub-form';
-            }else{
-                newFormSectionClass[i]='hide';
-            }
-        }
-        setFormSectionClass(newFormSectionClass)
-        // console.log(formSectionClass);
-    }
+    const [showMaintainance, setShowMaintainance] = useState('hide');  
+    
     const [propTypeSelectionClass, setpropTypeSelectionClass]=useState(['hide','hide'])
     const handlePropChange=(e)=>{
         if(e.target.value=='Residential'){
@@ -145,11 +153,20 @@ const ListYourProperty =()=>{
             setShowMaintainance('hide');
         }
     }
+    const [forSale,setForSale]=useState(false);
+    const handleSale=(e)=>{
+        setForSale(true);
+        handleSelections(e);
+    }
+    // End
 
+    // The bell icon on the page can be used to log the current selection
     const printSelection=()=>{
         console.log(selections);
         console.log(forSale);
     }
+
+    // Overlay start
 
     const [overlayVisible, setOverlayVisible] = useState('hide');
 
@@ -163,7 +180,10 @@ const ListYourProperty =()=>{
         };
     }
 
+    // End
+
     const [containerSymbol, setContainerSymbol] = useState('listPropertyContainer');
+    
     const finalSubmit=()=>{
         setContainerSymbol('hide');
         setOverlayVisible('hide');
@@ -178,6 +198,9 @@ const ListYourProperty =()=>{
         setOverlayVisible('hide');
         setConfirmationPage('hide');
     }
+
+    // Preview page start
+
     const [previewPage, setPreviewPage] = useState('hide');
     
     const amenitiesContainer = document.getElementById('property-amenities-container');
@@ -187,15 +210,7 @@ const ListYourProperty =()=>{
         const amenitiesList = selections['amenities'];
         amenitiesList.forEach(element=>{amenitiesContainer.appendChild(element)});
     } 
-    const [forSale,setForSale]=useState(false);
-    const handleSale=(e)=>{
-        setForSale(true);
-        handleSelections(e);
-    }
-
-    const showPreviewPage =()=>{
-        console.log(selections);
-    }
+    
 
     const [currentImage, setCurrentImage] = useState(0);
     const images =[];
@@ -210,6 +225,8 @@ const ListYourProperty =()=>{
     const prevImage = () => {
         setCurrentImage((prevImage) => (prevImage - 1 + images.length) % images.length);
     };
+
+    // end
 
     return(
         <>

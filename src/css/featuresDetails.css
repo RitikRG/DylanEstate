@@ -99,3 +99,13 @@
     }
     
   }
+
+
+/* Responsive css */
+
+/* For mobile and tablets devices */
+@media (max-width: 1150px) {
+  #features-form {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

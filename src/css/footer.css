@@ -6,7 +6,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     margin-top:300px;
 
-}
+} 
 .footer .logo {
     display: flex;
     align-items: start;
@@ -69,4 +69,33 @@
 }
 .footer .bottom .language-currency img {
     margin-right: 5px;
+}
+/* Responsive design */
+
+/* For mobile and tablet devices */
+@media (max-width: 1150px) {
+    .footer{
+        column-gap: 40px;
+    }
+    .footer .logo {
+        grid-column-start: 1;
+        grid-column-end: 6;
+    }
+    .footer .column {
+        grid-column: span 2;
+    }
+    .footer .bottom {
+        display: block;
+        text-align: center;
+    }
+    .footer .bottom .language-currency{
+        margin-top: 10px;
+    }
+}
+
+
+/* For desktops */
+@media (min-width: 1150px) {
+
+
 }

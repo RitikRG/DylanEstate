@@ -25,6 +25,7 @@ const SellerHomepage=()=>{
     const handlePhoneNumber=(e)=>{
         setPhoneNumber(e.target.value);
     }
+
     return(
         <div className="sellerContainer">
             <div className="upper-section">
@@ -346,7 +347,7 @@ const SellerHomepage=()=>{
                 </div>
             </div>
         
-    </div>
+        </div>
     )
 }
 
