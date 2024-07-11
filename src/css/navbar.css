@@ -1,39 +1,114 @@
 
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    background-color: var(--secondary-bg);
-    padding: 1rem 4rem;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  background-color: var(--secondary-bg);
+  padding: 1rem 4rem;
+}
+
+.logo a {
+  display: flex;
+  align-items: baseline;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 3rem;
   
-  .logo a {
-    display: flex;
-    align-items: baseline;
-  }
-  
-  .nav-links {
+}
+
+.nav-links li {
+  ul{
     list-style: none;
     display: flex;
-    gap: 3rem;
-    
+    align-items: center;
+    gap: 1rem;
   }
-  
-  .nav-links li {
-    ul{
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-  }
-  
-  .nav-links a {
-    color: black;
+}
+
+.nav-links a {
+  color: black;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Mobile Navbar */
+
+.navbarToggler img{
+  width: 25px;
+  height: 25px;
+}
+.navbarClose img{
+  width: 25px;
+  height: 25px;
+}
+.navbarToggler{
+  background: transparent;
+  border: none;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.mobiNavbar{
+  padding:20px;
+  text-align: center;
+  position: fixed;
+  z-index: 100;
+  background-color: var(--secondary-bg);
+  width: 80%;
+  margin: 10px auto;
+  margin-top:70px ;
+  border-bottom: 2px solid var(--border-color);
+  border-radius:10px;
+  box-shadow: 10px 10px 85px -14px rgba(0,0,0,0.3);
+}
+.mobiNavbar ul{
+  list-style: none;
+  padding: 0%;
+  line-height: 35px;
+  a{
+    color: var(--primary-bg);
+    font-weight: 500;
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 700;
+  }
+}
+.disable{
+  display: none;
+}
+.navbarClose{
+  background: transparent;
+  border: none;
+  margin-right: 9px;
+  margin-top: 1px;
+}
+
+
+/* For mobile devices */
+@media (max-width: 768px) {
+  .nav-links{
+    display: none;
+  }
+}
+
+/* For tablets */
+@media (min-width: 768px) and (max-width: 1150px) {
+  .nav-links{
+    display: none;
+  }
+}
+
+/* For desktops */
+@media (min-width: 1150px) {
+  .navbarToggler{
+    display: none;
+  }
+  .navbarClose{
+    display: none;
+  }
+  .mobiNavbar{
+    display: none;
   }
   
-  
-  
+}
