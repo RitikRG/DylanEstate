@@ -438,3 +438,44 @@
 .show-more:hover {
   text-decoration: underline;
 }
+
+/* Responsive css */
+
+/* For mobile and tablets devices */
+@media (max-width: 1150px) {
+  .preview-property-container {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    
+  }
+  .property-info {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    margin: 20px;
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+  }
+  .reviews-container{
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+  }
+  .review-card{
+    width: 100%;
+  }
+  .properties-container{
+    overflow-x: scroll;
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+  }
+  .property-card{
+    width: 200px;
+  }
+}  

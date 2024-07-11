@@ -171,3 +171,16 @@ font-weight: bold;
     margin-bottom: 5px;
   }
   
+  @media (max-width: 1150px) {
+    .map-section{
+      grid-column-start: 1;
+      grid-column-end: 4;
+      width: 100%;
+      max-width: 900px;
+      margin: auto;
+    }
+    .tabs-container{
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+  }
