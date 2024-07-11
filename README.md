@@ -6,7 +6,7 @@ This project is a web application developed using ReactJS. It aims to provide us
 ## Live Demo
 You can view the live version of the project here: [Dylan Estate Assignment](https://dylanestateassignment.netlify.app/)
 
-Demo Video(Watch it on 2x): [Dylan Estate Assignment Demo Video]([https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg](https://youtu.be/8HU3Hv9E0bg))
+Demo Video(Watch it on 2x): [Dylan Estate Assignment Demo Video](https://youtu.be/8HU3Hv9E0bg)]
 
 ## Repository Structure
 The repository consists of two main branches:
